@@ -1,6 +1,6 @@
 {
   "name": "@ruguoapp/cls-adapter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Continuation Local Storage made easy",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
     "url": "git+https://github.com/ruguoapp/cls-adapter.git"
   },
   "dependencies": {
+    "@types/uuid": "^3.4.3",
     "cls-hooked": "4.2.2",
     "uuid": "3.2.1"
   },

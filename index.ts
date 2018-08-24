@@ -6,9 +6,9 @@ const DEFAULT_NAMESPACE = 'tracing'
 export function getKoaMiddleware() {
   const namespace = this.createNamespace()
 
-  return async function(ctx, next) {
+  return async function(ctx: any, next: Function) {
     await new Promise(
-      namespace.bind(function(resolve, reject) {
+      namespace.bind(function(resolve: Function, reject: Function) {
         namespace.set('request_id', ctx.request.headers['x-request-id'] || uuid.v4())
 
         next()
@@ -19,7 +19,7 @@ export function getKoaMiddleware() {
   }
 }
 
-export function setOnContext(key, value) {
+export function setOnContext(key: string, value: any) {
   const namespace = this.createNamespace()
   namespace.set(key, value)
 }
