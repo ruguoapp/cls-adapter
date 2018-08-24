@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "compile": "tsc",
-    "build": "npm run clean && npm run lint && npm run compile",
+    "build": "npm run clean && npm run compile",
     "lint": "tslint --project .",
     "test": "npm run compile",
     "clean": "rm -rf dist",
@@ -33,7 +33,7 @@
     "semantic-release": "12.4.1",
     "sinon": "4.3.0",
     "sinon-chai": "2.14.0",
-    "tslint": "5.10.0",
+    "tslint": "^5.10.0",
     "tslint-config-prettier": "1.13.0",
     "tslint-jike-node": "0.0.14",
     "typescript": "2.9.2"
