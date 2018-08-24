@@ -1,6 +1,6 @@
 {
-  "name": "@emartech/cls-adapter",
-  "version": "0.0.0",
+  "name": "@ruguoapp/cls-adapter",
+  "version": "0.0.1",
   "description": "Continuation Local Storage made easy",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emartech/cls-adapter.git"
+    "url": "git+https://github.com/ruguoapp/cls-adapter.git"
   },
   "dependencies": {
     "cls-hooked": "4.2.2",
@@ -28,7 +28,11 @@
     "mocha": "5.0.0",
     "semantic-release": "12.4.1",
     "sinon": "4.3.0",
-    "sinon-chai": "2.14.0"
+    "sinon-chai": "2.14.0",
+    "tslint": "5.10.0",
+    "tslint-config-prettier": "1.13.0",
+    "tslint-jike-node": "0.0.14",
+    "typescript": "2.9.2"
   },
   "keywords": [
     "threading",
@@ -36,13 +40,13 @@
     "context",
     "middleware"
   ],
-  "author": "Emartech",
+  "author": "Joway",
   "engines": {
     "node": ">= 8"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/emartech/cls-adapter/issues"
+    "url": "https://github.com/ruguoapp/cls-adapter/issues"
   },
-  "homepage": "https://github.com/emartech/cls-adapter#readme"
+  "homepage": "https://github.com/ruguoapp/cls-adapter#readme"
 }
