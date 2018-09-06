@@ -1,6 +1,6 @@
 {
   "name": "@ruguoapp/cls-adapter",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Continuation Local Storage made easy",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
