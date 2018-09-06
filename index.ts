@@ -1,19 +1,21 @@
 import * as continuationLocalStorage from 'cls-hooked'
-import * as uuid from 'uuid'
+import { Namespace } from 'cls-hooked'
+import { v4 as uuid } from 'uuid'
+import { Context } from 'koa'
 
 const DEFAULT_NAMESPACE = 'tracing'
 
 export function getKoaMiddleware() {
   const namespace = this.createNamespace()
-
-  return async function(ctx: any, next: Function) {
+  return async function(ctx: Context, next: Function) {
     await new Promise(
-      namespace.bind(function(resolve: Function, reject: Function) {
-        namespace.set('request_id', ctx.request.headers['x-request-id'] || uuid.v4())
-
-        next()
-          .then(resolve)
-          .catch(reject)
+      namespace.bind(async function(resolve: Function, reject: Function) {
+        namespace.set('request_id', ctx.request.headers['x-request-id'] || uuid())
+        try {
+          resolve(await next())
+        } catch (err) {
+          reject(err)
+        }
       }),
     )
   }
@@ -29,11 +31,10 @@ export function getContextStorage() {
     const { id, _ns_name, ...contextData } = this._namespace.active
     return contextData
   }
-
   return {}
 }
 
-export function getRequestId() {
+export function getRequestId(): string {
   return this.getContextStorage().request_id
 }
 
@@ -44,7 +45,7 @@ export function destroyNamespace() {
   }
 }
 
-export function createNamespace() {
+export function createNamespace(): Namespace {
   if (!this._namespace) {
     this._namespace = continuationLocalStorage.createNamespace(DEFAULT_NAMESPACE)
   }
