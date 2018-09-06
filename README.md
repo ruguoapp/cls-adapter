@@ -16,65 +16,64 @@ npm install @emartech/cls-adapter
 ### Usage
 
 ```javascript
-const Koa = require('koa');
-const ClsAdapter = require('@emartech/cls-adapter');
+const Koa = require('koa')
+const ClsAdapter = require('@emartech/cls-adapter')
 
-const logWithStorage = (message) => {
-  console.log(Object.assign({ message }, ClsAdapter.getContextStorage()));
-};
+const logWithStorage = message => {
+  console.log(Object.assign({ message }, ClsAdapter.getContextStorage()))
+}
 const calculationResult = () => {
-  logWithStorage(100);
-};
+  logWithStorage(100)
+}
 
-const app = new Koa();
-app.use(ClsAdapter.getKoaMiddleware());
+const app = new Koa()
+app.use(ClsAdapter.getKoaMiddleware())
 
-app.use(async (ctx) => {
-  ClsAdapter.setOnContext('customer_id', 1000);
+app.use(async ctx => {
+  ClsAdapter.setOnContext('customer_id', 1000)
 
-  logWithStorage('works');
+  logWithStorage('works')
   // { message: 'works', request_id: 'd5caaa0e-b04e-4d94-bc88-3ed3b62dc94a' }
-  
-  calculationResult();
+
+  calculationResult()
   // { message: 100, request_id: 'd5caaa0e-b04e-4d94-bc88-3ed3b62dc94a' }
 
-  ctx.body = 'It works';
-});
+  ctx.body = 'It works'
+})
 
-app.listen(3000);
-
+app.listen(3000)
 ```
 
 ### API
 
 #### ClsAdapter.getKoaMiddleware()
 
-Returns a middleware function compatible with Koa that stores (or generates if missing) 
+Returns a middleware function compatible with Koa that stores (or generates if missing)
 the request identifier from the header (X-Request-Id) and sets it on the storage as `request_id`.
 
 ```javascript
-const app = new Koa();
-app.use(ClsAdapter.getKoaMiddleware());
+const app = new Koa()
+app.use(ClsAdapter.getKoaMiddleware())
 
 app.use(async () => {
-  ClsAdapter.getContextStorage();
+  ClsAdapter.getContextStorage()
   // { request_id: 'd5caaa0e-b04e-4d94-bc88-3ed3b62dc94a' }
-});
+})
 ```
 
 #### ClsAdapter.getExpressMiddleware()
 
-Returns a middleware function compatible with Express that stores (or generates if missing) 
+Returns a middleware function compatible with Express that stores (or generates if missing)
 the request identifier from the header (X-Request-Id) and sets it on the storage as `request_id`.
 
 ```javascript
-const app = express();
-app.use(ClsAdapter.getExpressMiddleware());
+const app = express()
+app.use(ClsAdapter.getExpressMiddleware())
 
 app.use(() => {
-  ClsAdapter.getContextStorage();
+  ClsAdapter.getContextStorage()
   // { request_id: 'd5caaa0e-b04e-4d94-bc88-3ed3b62dc94a' }
-});
+})
 ```
 
 #### ClsAdapter.getContextStorage()
@@ -86,9 +85,9 @@ Returns the all the values set on the storage.
 Sets a key with a given value on the storage.
 
 ```javascript
-ClsAdapter.setOnContext('customer_id', 1);
+ClsAdapter.setOnContext('customer_id', 1)
 
-ClsAdapter.getContextStorage();
+ClsAdapter.getContextStorage()
 // { customer_id: 1 }
 ```
 
@@ -97,8 +96,8 @@ ClsAdapter.getContextStorage();
 Returns the the request identifier set on the storage. The identifiers key is `request_id`.
 
 ```javascript
-ClsAdapter.setOnContext('request_id', 'd5caaa0e-b04e-4d94-bc88-3ed3b62dc94a');
-ClsAdapter.getRequestId();
+ClsAdapter.setOnContext('request_id', 'd5caaa0e-b04e-4d94-bc88-3ed3b62dc94a')
+ClsAdapter.getRequestId()
 // 'd5caaa0e-b04e-4d94-bc88-3ed3b62dc94a'
 ```
 
@@ -107,9 +106,9 @@ ClsAdapter.getRequestId();
 Returns a function that extends the given object with the current storage.
 
 ```javascript
-ClsAdapter.setOnContext('customer_id', 1);
+ClsAdapter.setOnContext('customer_id', 1)
 
-ClsAdapter.addContextStorageToInput()({ debug: true });
+ClsAdapter.addContextStorageToInput()({ debug: true })
 // { debug: true, customer_id: 1 }
 ```
 
@@ -118,8 +117,8 @@ ClsAdapter.addContextStorageToInput()({ debug: true });
 Returns a function that extends the given object with the request identifier set on the current storage.
 
 ```javascript
-ClsAdapter.setOnContext('request_id', 'd5caaa0e-b04e-4d94-bc88-3ed3b62dc94a');
+ClsAdapter.setOnContext('request_id', 'd5caaa0e-b04e-4d94-bc88-3ed3b62dc94a')
 
-ClsAdapter.addRequestIdToInput()({ debug: true });
+ClsAdapter.addRequestIdToInput()({ debug: true })
 // { debug: true, request_id: 'd5caaa0e-b04e-4d94-bc88-3ed3b62dc94a' }
 ```

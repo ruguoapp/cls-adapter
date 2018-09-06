@@ -9,12 +9,7 @@
     "target": "es6",
     "strictNullChecks": true,
     "allowUnusedLabels": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "typeRoots": ["node_modules/@types"]
   },
-  "exclude": [
-    "dist",
-    "node_modules"
-  ]
+  "exclude": ["dist", "node_modules"]
 }
